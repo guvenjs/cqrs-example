@@ -1,18 +1,18 @@
-﻿using CQRS.Example.Med.Commands.CreateProduct;
-using CQRS.Example.Med.Queries.GetAllProducts;
-using CQRS.Example.Med.Queries.GetProductById;
+﻿using CQRS.Example.Med.Commands.CreateCustomer;
+using CQRS.Example.Med.Queries.GetAllCustomer;
+using CQRS.Example.Med.Queries.GetCustomerById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CQRS.Example.Controllers
 {
-    [Route("api/products")]
+    [Route("api/customers")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class CustomerController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public ProductController(IMediator mediator)
+        public CustomerController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -20,22 +20,22 @@ namespace CQRS.Example.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var query = new GetProductByIdQueryRequest() { Id = Guid.NewGuid() };
+            var query = new GetCustomerByIdQueryRequest() { Id = id };
             return Ok(await _mediator.Send(query));
         }
 
         [HttpGet()]
         public async Task<IActionResult> GetAll()
         {
-            var query = new GetAllProductsQueryRequest() { };
+            var query = new GetAllCustomerQueryRequest();
 
             return Ok(await _mediator.Send(query));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(CreateProductCommand command)
+        public async Task<IActionResult> Post(CreateCustomerCommand data)
         {
-            return Ok(await _mediator.Send(command));
+            return Ok(await _mediator.Send(data));
         }
     }
 }

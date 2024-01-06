@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CQRS.Example.Med.Commands
+namespace CQRS.Example.Med.Commands.CreateProduct
 {
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Guid>
     {

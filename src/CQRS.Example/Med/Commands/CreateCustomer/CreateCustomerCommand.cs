@@ -1,6 +1,8 @@
-﻿namespace CQRS.Example.Entities
+﻿using MediatR;
+
+namespace CQRS.Example.Med.Commands.CreateCustomer
 {
-    public class Customer
+    public class CreateCustomerCommand : IRequest<Guid>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
